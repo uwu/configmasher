@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+
+    "declaration": true,
+
+		"moduleResolution": "node",
+		"noImplicitAny": false,
+
+    "allowSyntheticDefaultImports": true,
+
+		"sourceMap": false,
+		"outDir": "./dist",
+
+		"rootDir": "./src",
+		"baseUrl": "./src",
+	},
+
+	"include":  [ "src/**/*.ts" ]
+}
