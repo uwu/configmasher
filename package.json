@@ -11,6 +11,7 @@
     "type": "git"
   },
   "scripts": {
+    "prepublish": "npm run build",
     "build": "rollup -c -w && npm run build:types",
     "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist"
   },
