@@ -3,8 +3,7 @@ import { Config } from "./types";
 import defu from "defu";
 
 function parseEnvEntry(key: string, value: any): Object {
-	const accessor = key.toLowerCase().split("__");
-	accessor.shift();
+	const accessor = key.toLowerCase().split(/__+/g);
 
 	const finalObject = {};
 
@@ -24,10 +23,14 @@ function parseEnvEntry(key: string, value: any): Object {
 }
 
 export default function parseEnvEntries(config: Config, entries: [string, unknown][]): Object {
+	const nameRegex = new RegExp(`^${config.name.toLowerCase()}_+`, "gm");
 	let finalObject = {};
 
-	for(const [key, value] of entries) {
-		if(key.toLowerCase().startsWith(config.name.toLowerCase())) {
+	for(let [key, value] of entries) {
+		let matches;
+
+		if(matches = key.toLowerCase().match(nameRegex)) {
+			key = key.toLowerCase().replace(matches[0], "");
 			finalObject = defu(finalObject, parseEnvEntry(key, value));
 		}
 	}
