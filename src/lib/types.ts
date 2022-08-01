@@ -1,12 +1,14 @@
 export interface Config {
-	defaults?: Object
-	name?: string
-	cwd?: string
+	defaults?: Object;
+	name?: string;
+	cwd?: string;
 	
 	dotenv?: boolean;
-	processenv?: boolean
+	processenv?: boolean;
 
-	configs: any[]
+	caseinsensitive: boolean;
+
+	configs: any[];
 }
 
 export interface Layer {
@@ -19,5 +21,5 @@ export interface Layer {
 
 export interface ConfigReturn {
 	config: any;
-	layers: Layer[]
+	layers: Layer[];
 }

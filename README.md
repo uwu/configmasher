@@ -60,8 +60,7 @@ console.log(config);
 - [ ] Proper documentation (can't be bothered atm, just use typedefs)
 - [ ] Allow as many underscores as the user wants between name and value : ``${NAME}_${VAL}``, ``${NAME}__${VAL}``, ``${NAME}_________${VAL}``
 - [ ] Automatically try to get and parse ${NAME}.json and toLowerCase if it exists
-- [ ] Allow casing options for process.env (camelCalse and all that)
-- [ ] Use naming scheme in defaults if already present (e.g jwttoken -> jwtToKen if a diff casing exists in the defaults) OR allow the use of a proxy to make keys case-insensitive
+- [X] Allow the use of a proxy to make keys case-insensitive
 - [ ] Support adding custom config formats
 - [ ] Support CJS and ESM config
 - [ ] Support RC config

@@ -2,14 +2,14 @@ import process from "node:process";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-import { uniqueArray, isObject, isJSON, resolvePath } from "./lib/generic.js";
+import { uniqueArray, isObject, isJSON, resolvePath, caseInsensitiveProxy, lowercaseObject } from "./lib/generic.js";
 import { Config, Layer, ConfigReturn } from "./lib/types.js";
 import parseEnvEntries from "./lib/env.js";
 
 import { default as dotenv } from "dotenv";
 import { defu } from "defu";
 
-async function doLayer(config: any, data: any): Promise<Layer> {
+async function doLayer(config: Config, data: any): Promise<Layer> {
 	const layerData: Layer = {
 		input: data,
 		type: "UNKNOWN"
@@ -68,6 +68,8 @@ export default async function loadConfig(config: Config): Promise<ConfigReturn> 
 		dotenv: true,
 		processenv: true,
 
+		caseinsensitive: false,
+
 		configs: []
 	});
 
@@ -86,5 +88,9 @@ export default async function loadConfig(config: Config): Promise<ConfigReturn> 
 		finalConfig = defu(finalConfig, layers[i].value);
 	}
 	
+	if(config.caseinsensitive) {
+		finalConfig = caseInsensitiveProxy(finalConfig);
+	}
+
 	return { config: finalConfig, layers };
 }
