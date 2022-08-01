@@ -1,7 +1,7 @@
 {
   "name": "configmasher",
-  "version": "1.0.0",
-  "description": "Config aggregator",
+  "version": "2.0.1",
+  "description": "NodeJS Config aggregator",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "prepublish": "npm run build",
-    "build": "rollup -c -w && npm run build:types",
+    "build": "rollup -c && npm run build:types",
     "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist"
   },
   "keywords": ["config", "dotenv", "config-aggregator", "config-parser"],
