@@ -14,6 +14,16 @@ const { config, layers } = await getConfig({
 
 	configs: [
 		{ "jsonobject": "hello from a json object" },
+		{ 
+			hello: { 
+				yo: "configmasher is now recursive",
+			}
+		},
+		{ 
+			hello: { 
+				hello: "configmasher is now recursive",
+			}
+		},
 		"jsonfile.json",
 		"hello.env"
 	]

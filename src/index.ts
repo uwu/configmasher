@@ -78,12 +78,12 @@ export default async function loadConfig(config: Config): Promise<ConfigReturn> 
 
 	config.configs = uniqueArray(config.configs);
 
-	const finalConfig: any = config.defaults;
+	let finalConfig: any = config.defaults;
 	const layers: Layer[] = [];
 
 	for(const i in config.configs) {
 		layers[i] = await doLayer(config, config.configs[i]);
-		Object.assign(finalConfig, layers[i].value);
+		finalConfig = defu(finalConfig, layers[i].value);
 	}
 	
 	return { config: finalConfig, layers };

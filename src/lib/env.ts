@@ -1,5 +1,7 @@
 import { Config } from "./types";
 
+import defu from "defu";
+
 function parseEnvEntry(key: string, value: any): Object {
 	const accessor = key.toLowerCase().split("__");
 	accessor.shift();
@@ -22,11 +24,11 @@ function parseEnvEntry(key: string, value: any): Object {
 }
 
 export default function parseEnvEntries(config: Config, entries: [string, unknown][]): Object {
-	const finalObject = {};
+	let finalObject = {};
 
 	for(const [key, value] of entries) {
 		if(key.toLowerCase().startsWith(config.name.toLowerCase())) {
-			Object.assign(finalObject, parseEnvEntry(key, value));
+			finalObject = defu(finalObject, parseEnvEntry(key, value));
 		}
 	}
 
