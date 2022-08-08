@@ -6,6 +6,8 @@ export interface Config {
 	dotenv?: boolean;
 	processenv?: boolean;
 
+	guessFiles?: boolean;
+
 	caseinsensitive: boolean;
 
 	configs: any[];

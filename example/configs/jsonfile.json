@@ -1,3 +1,4 @@
 {
-	"jsonfile": "hello from a json file"
+	"jsonfile": "hello from a json file",
+	"HELLOJSON": "WTF"
 }

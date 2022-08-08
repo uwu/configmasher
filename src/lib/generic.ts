@@ -26,30 +26,19 @@ export function caseInsensitiveProxy(obj): typeof Proxy {
 
 export function lowercaseObject(obj) {
 	for (let [key, value] of Object.entries(obj)) {
-		if(typeof(key) === "string") {
+		if (isObject(value)) {
+			value = lowercaseObject(value);
+		}
+
+		let lowerKey = key.toLowerCase();
+		if(typeof(key) === "string" && key !== lowerKey) {
 			delete obj[key];
 
-			if (isObject(value)) {
-				obj[key.toLowerCase()] = lowercaseObject(value);
-			} else {
-				obj[key.toLowerCase()] = value;
-			}
+			obj[lowerKey] = value;
 		}
 	}
 
 	return obj;
-}
-
-export function isJSON(str: string): Object | false {
-	let result;
-
-	try {
-		result = JSON.parse(str);
-	} catch(e) {
-		return false;
-	}
-
-	return result;
 }
 
 export function resolvePath(cwd: string, filePath: string): string {

@@ -2,7 +2,7 @@ import process from "node:process";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-import { uniqueArray, isObject, isJSON, resolvePath, caseInsensitiveProxy, lowercaseObject } from "./lib/generic.js";
+import { uniqueArray, isObject, resolvePath, caseInsensitiveProxy, lowercaseObject } from "./lib/generic.js";
 import { Config, Layer, ConfigReturn } from "./lib/types.js";
 import parseEnvEntries from "./lib/env.js";
 
@@ -12,6 +12,7 @@ import { defu } from "defu";
 async function doLayer(config: Config, data: any): Promise<Layer> {
 	const layerData: Layer = {
 		input: data,
+		value: {},
 		type: "UNKNOWN"
 	};
 
@@ -35,7 +36,7 @@ async function doLayer(config: Config, data: any): Promise<Layer> {
 
 			case "JSON_FILE":
 				const fileContents = await fs.readFile(resolvePath(config.cwd, data), "utf8");
-				layerData.value = isJSON(fileContents);
+				layerData.value = JSON.parse(fileContents);
 			break;
 
 			case "ENV_FILE":
@@ -56,6 +57,10 @@ async function doLayer(config: Config, data: any): Promise<Layer> {
 		layerData.error = e as Error;
 	}
 
+	if(layerData.value && (layerData.type == "JSON_FILE" || layerData.type == "OBJECT") && config.caseinsensitive) {
+		layerData.value = lowercaseObject(layerData.value);
+	}
+
 	return layerData;
 }
 
@@ -68,10 +73,21 @@ export default async function loadConfig(config: Config): Promise<ConfigReturn> 
 		dotenv: true,
 		processenv: true,
 
+		guessFiles: true,
+
 		caseinsensitive: false,
 
 		configs: []
 	});
+
+	if(config.guessFiles) {
+		const guessRegex = new RegExp(`^${config.name}\.(env|json)`, config.caseinsensitive ? "i" : "");
+		for(const file of await fs.readdir(config.cwd)) {
+			if(file.match(guessRegex)) {
+				config.configs.push(path.join(file));
+			}
+		}
+	}
 
 	if(config.dotenv && config.cwd) {
 		config.configs.push(path.resolve(config.cwd, ".env"));
@@ -81,10 +97,17 @@ export default async function loadConfig(config: Config): Promise<ConfigReturn> 
 	config.configs = uniqueArray(config.configs);
 
 	let finalConfig: any = config.defaults;
+	const layerPromises: Promise<Layer>[] = [];
 	const layers: Layer[] = [];
 
 	for(const i in config.configs) {
-		layers[i] = await doLayer(config, config.configs[i]);
+		layerPromises[i] = doLayer(config, config.configs[i]);
+	}
+
+	await Promise.all(layerPromises);
+
+	for(const i in layerPromises) {
+		layers[i] = await layerPromises[i];
 		finalConfig = defu(finalConfig, layers[i].value);
 	}
 	

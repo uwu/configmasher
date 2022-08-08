@@ -10,13 +10,16 @@ const { config, layers } = await getConfig({
 	dotenv: true,
 	processenv: true,
 
+	caseinsensitive: false,
+	guessFiles: false,
+
 	cwd: path.join(__dirname, "configs"),
 
 	configs: [
 		{ "jsonobject": "hello from a json object" },
 		{ 
 			hello: { 
-				yo: "configmasher is now recursive",
+				yOo: "configmasher is now recursive",
 			}
 		},
 		{ 
