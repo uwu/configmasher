@@ -1,5 +1,4 @@
 src/
 example/
-dist/lib/
 tsconfig.json
 rollup.config.js

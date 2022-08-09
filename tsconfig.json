@@ -3,7 +3,7 @@
 		"target": "ESNext",
 		"module": "ESNext",
 
-    "declaration": true,
+    "declaration": false,
 
 		"moduleResolution": "node",
 		"noImplicitAny": false,
@@ -11,11 +11,12 @@
     "allowSyntheticDefaultImports": true,
 
 		"sourceMap": false,
-		"outDir": "./dist",
+		"outDir": "dist",
 
-		"rootDir": "./src",
-		"baseUrl": "./src",
+		"rootDir": "src",
+		"baseUrl": "src",
 	},
 
-	"include":  [ "src/**/*.ts" ]
+	"include": [ "src/**/*.ts" ],
+	"exclude": [ "dist" ]
 }
