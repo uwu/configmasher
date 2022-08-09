@@ -65,7 +65,7 @@ async function doLayer(config: Config, data: any): Promise<Layer> {
 }
 
 export default async function loadConfig(config: Config): Promise<ConfigReturn> {
-	config = defu(config, {
+	config = defu<Config, Config>(config, {
 		defaults: {},
 		name: "config",
 		cwd: process.cwd(),

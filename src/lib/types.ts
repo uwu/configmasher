@@ -8,9 +8,9 @@ export interface Config {
 
 	guessFiles?: boolean;
 
-	caseinsensitive: boolean;
+	caseinsensitive?: boolean;
 
-	configs: any[];
+	configs?: any[];
 }
 
 export interface Layer {

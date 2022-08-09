@@ -1,6 +1,6 @@
 {
   "name": "configmasher",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "NodeJS Config aggregator",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
