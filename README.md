@@ -4,6 +4,12 @@
 
 it was heavily inspired by [unjs](https://github.com/unjs)'s [c12](https://github.com/unjs/c12) project.
 
+## Install
+
+```sh
+npm i @uwu/configmasher
+```
+
 ## Example
 
 The config files used in this example are available [here](https://github.com/uwu/configmasher/tree/main/example/configs)

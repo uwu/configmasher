@@ -1,6 +1,6 @@
 {
-  "name": "configmasher",
-  "version": "2.2.0",
+  "name": "@uwu/configmasher",
+  "version": "1.0.0",
   "description": "NodeJS Config aggregator",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -10,6 +10,10 @@
     "url": "https://github.com/uwu/configmasher.git",
     "type": "git"
   },
+  "bugs": {
+    "url": "https://github.com/uwu/configmasher/issues"
+  },
+  "homepage": "https://github.com/uwu/configmasher#readme",
   "scripts": {
     "prepublish": "npm run build",
     "build": "rimraf dist && npm run build:types && rollup -c && rimraf dist/types",
@@ -39,5 +43,8 @@
     "rollup-plugin-esbuild": "^4.9.1",
     "rollup-plugin-typescript2": "^0.32.1",
     "typescript": "^4.7.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
