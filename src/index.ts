@@ -65,7 +65,7 @@ async function doLayer(config: Config, data: any): Promise<Layer> {
 }
 
 export default async function loadConfig(config: Config): Promise<ConfigReturn> {
-	config = defu<Config, Config>(config, {
+	config = defu<Config, [Config]>(config, {
 		defaults: {},
 		name: "config",
 		cwd: process.cwd(),
@@ -108,7 +108,7 @@ export default async function loadConfig(config: Config): Promise<ConfigReturn> 
 
 	for(const i in layerPromises) {
 		layers[i] = await layerPromises[i];
-		finalConfig = defu(finalConfig, layers[i].value);
+		finalConfig = defu(layers[i].value, finalConfig);
 	}
 	
 	if(config.caseinsensitive) {

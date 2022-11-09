@@ -1,4 +1,4 @@
-export interface Config {
+export interface Config extends Object {
 	defaults?: Object;
 	name?: string;
 	cwd?: string;
