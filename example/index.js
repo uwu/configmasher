@@ -6,6 +6,8 @@ import getConfig from "../dist/index.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+console.time("config load");
+
 const { config, layers } = await getConfig({
 	dotenv: true,
 	processenv: true,
@@ -32,4 +34,5 @@ const { config, layers } = await getConfig({
 	]
 });
 
+console.timeEnd("config load");
 console.log(config);

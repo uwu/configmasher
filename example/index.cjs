@@ -3,6 +3,8 @@ const path = require("node:path");
 const getConfig = require("../dist/index.cjs");
 
 (async () => {
+	console.time("config load");
+	
 	const { config, layers } = await getConfig({
 		dotenv: true,
 		processenv: true,
@@ -16,5 +18,6 @@ const getConfig = require("../dist/index.cjs");
 		]
 	});
 	
+	console.timeEnd("config load");
 	console.log(config);
 })();
