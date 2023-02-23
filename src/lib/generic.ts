@@ -31,7 +31,11 @@ export function caseInsensitiveProxy(obj: any): typeof Proxy {
 }
 
 export function lowercaseObject(obj) {
-	for (let [key, value] of Object.entries(obj)) {
+	let entries = Object.entries(obj);
+	for (let i = 0; i < entries.length; i++) {
+		let key = entries[i][0];
+		let value = entries[i][1];
+
 		if (isObject(value)) {
 			value = lowercaseObject(value);
 		}
