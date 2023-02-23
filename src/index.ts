@@ -2,7 +2,7 @@ import process from "node:process";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-import { uniqueArray, isObject, resolvePath, caseInsensitiveProxy, lowercaseObject } from "./lib/generic.js";
+import { uniqueArrayFilter, isObject, resolvePath, caseInsensitiveProxy, lowercaseObject } from "./lib/generic.js";
 import { Config, Layer, ConfigReturn } from "./lib/types.js";
 import parseEnvEntries from "./lib/env.js";
 
@@ -94,7 +94,7 @@ export default async function loadConfig(config: Config): Promise<ConfigReturn> 
 	}
 	if(config.processenv) config.configs.push(process.env);
 
-	config.configs = uniqueArray(config.configs);
+	config.configs = config.configs.filter(uniqueArrayFilter);
 
 	let finalConfig: any = config.defaults;
 	const layerPromises: Promise<Layer>[] = [];
@@ -113,6 +113,33 @@ export default async function loadConfig(config: Config): Promise<ConfigReturn> 
 	
 	if(config.caseinsensitive) {
 		finalConfig = caseInsensitiveProxy(finalConfig);
+	}
+
+	const missingEntries = [];
+	for(const i in config.mandatory) {
+		let entry = config.mandatory[i];
+
+		if(Array.isArray(entry) && entry.length > 0) {
+			entry = entry as string[];
+
+			let lastObject = finalConfig;
+			for(let i = 0; i < entry.length; i++) {
+				lastObject = lastObject[entry[i]];
+				if(!lastObject) {
+					missingEntries.push(entry.join("."));
+					break;
+				}
+			}
+		} else if(typeof(entry) == "string") {
+			if(!finalConfig[entry]) {
+				missingEntries.push(entry);
+			}
+		}
+	}
+
+	if(missingEntries.length > 0) {
+		let missingEntriesText = missingEntries.join(", ");
+		throw Error(`Configuration is missing the following entries : ${config.caseinsensitive ? missingEntriesText.toLowerCase(): missingEntriesText}`);
 	}
 
 	return { config: finalConfig, layers };

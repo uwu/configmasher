@@ -1,6 +1,6 @@
 {
   "name": "@uwu/configmasher",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "NodeJS Config aggregator",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -28,7 +28,7 @@
   "author": "Phorcys",
   "license": "CC0-1.0",
   "dependencies": {
-    "defu": "^6.1.0",
+    "defu": "^6.1.2",
     "dotenv": "^16.0.3"
   },
   "devDependencies": {
@@ -42,7 +42,7 @@
     "rollup-plugin-dts": "^4.2.3",
     "rollup-plugin-esbuild": "^4.10.3",
     "rollup-plugin-typescript2": "^0.32.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.5"
   },
   "publishConfig": {
     "access": "public"

@@ -1,10 +1,16 @@
 import { existsSync as fileExists } from "node:fs";
 import path from "node:path";
 
-export const isObject = (obj: any) => obj.__proto__ === Object.prototype;
-export const uniqueArray = (arr: any[]): any[] => [...new Set(arr)];
+export function isObject(obj: any) {
+	// faster than obj.__proto__ === Object.prototype but doesn't account for classes.
+	return typeof(obj) === "object" && !Array.isArray(obj);
+}
 
-export function caseInsensitiveProxy(obj): typeof Proxy {
+export function uniqueArrayFilter(value: any, index: number, array: any[]) {
+	return array.indexOf(value) === index;
+}
+
+export function caseInsensitiveProxy(obj: any): typeof Proxy {
 	return new Proxy(obj, {
 		get(dest, prop) {
 			if(typeof(prop) === "string") {

@@ -11,6 +11,7 @@ export interface Config extends Object {
 	caseinsensitive?: boolean;
 
 	configs?: any[];
+	mandatory?: (string[] | string)[];
 }
 
 export interface Layer {
