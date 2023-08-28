@@ -22,7 +22,7 @@ export interface Layer {
 	error?: Error;
 }
 
-export interface ConfigReturn {
-	config: any;
+export interface ConfigReturn<ReturnType = any> {
+	config: ReturnType;
 	layers: Layer[];
 }
