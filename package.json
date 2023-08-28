@@ -1,6 +1,6 @@
 {
   "name": "@uwu/configmasher",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "NodeJS Config aggregator",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
