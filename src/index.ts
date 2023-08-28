@@ -64,7 +64,7 @@ async function doLayer(config: Config, data: any): Promise<Layer> {
 	return layerData;
 }
 
-export default async function loadConfig(config: Config): Promise<ConfigReturn> {
+export default async function loadConfig<ReturnType = any>(config: Config): Promise<ConfigReturn<ReturnType>> {
 	config = defu<Config, [Config]>(config, {
 		defaults: {},
 		name: "config",
