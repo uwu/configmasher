@@ -1,11 +1,11 @@
 const path = require("node:path");
 
-const getConfig = require("../dist/index.cjs");
+const loadConfig = require("../dist/index.cjs");
 
 (async () => {
 	console.time("config load");
 	
-	const { config, layers } = await getConfig({
+	const { config, layers } = await loadConfig({
 		dotenv: true,
 		processenv: true,
 		

@@ -2,13 +2,13 @@ import path from "node:path";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import getConfig from "../src/index";
+import loadConfig from "../src/index";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 console.time("config load");
 
-const { config, layers } = await getConfig({
+const { config, layers } = await loadConfig({
 	dotenv: true,
 	processenv: true,
 
