@@ -15,8 +15,8 @@
   },
   "homepage": "https://github.com/uwu/configmasher#readme",
   "scripts": {
-    "prepublish": "npm run build",
-    "build": "rimraf dist && npm run build:types && rollup -c && rimraf dist/types",
+    "prepublish": "pnpm build",
+    "build": "rimraf dist && pnpm build:types && rollup -c && rimraf dist/types",
     "build:types": "tsc --declaration --emitDeclarationOnly --declarationDir dist/types"
   },
   "keywords": [
