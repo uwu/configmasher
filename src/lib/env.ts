@@ -2,6 +2,15 @@ import { Config } from "./types";
 
 import defu from "defu";
 
+/**
+ * Parse a singular environment entry into an object based on its {@link key}.
+ * 
+ * KEY__NAME="value" => { key: { name: "value" } }
+ * 
+ * @param key 
+ * @param value 
+ * @returns 
+ */
 function parseEnvEntry(key: string, value: any): Object {
     const accessor = key.split(/__+/g);
 
@@ -22,6 +31,13 @@ function parseEnvEntry(key: string, value: any): Object {
     return finalObject;
 }
 
+/**
+ * Parses environment {@link entries} into an object based prefixed by {@link config}.name.
+ * 
+ * @param config The configuration that was passed to loadConfig.
+ * @param entries Environment entries in a key-value pair array.
+ * @returns Environment entries parsed into an object.
+ */
 export default function parseEnvEntries(config: Config, entries: [string, unknown][]): Object {
     const nameRegex = new RegExp(`^${config.name}_+`, "gm" + (config.caseinsensitive ? "i" : ""));
     let finalObject = {};
