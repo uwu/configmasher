@@ -74,26 +74,22 @@ export function lowercaseObject(object: Object): Object {
 }
 
 /**
- * Resolve a path to a file.
+ * Resolve a path to a file and check whether it exists or not in the process.
  * 
  * If the {@link filePath file path} is an absolute path, then it is returned as is.
  * 
  * Otherwise, we try to resolve it based on the passed {@link workingDirectory working directory}.
+ * 
+ * @param workingDirectory The working directory to resolve the path from.
+ * @param filePath The file path to resolve.
+ * @returns The resolved path.
  */
 export function resolvePath(workingDirectory: string, filePath: string): string {
-    if(fileExists(filePath)) {
-        return filePath;
+    const resolvedPath = path.resolve(workingDirectory, filePath);
+
+    if(fileExists(resolvedPath)) {
+        return resolvedPath;
     } else {
-        /*
-            In this context, relative implies that the path is relative to the workingDirectory argument,
-            not the process' working directory
-        */
-        const relativePath = path.join(workingDirectory, filePath);
-
-        if(fileExists(relativePath)) {
-            return relativePath;
-        }
+        throw Error(`File with path "${resolvedPath}" does not exist`);
     }
-
-    throw Error(`File with path "${filePath}" does not exist`);
 }
