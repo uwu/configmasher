@@ -17,6 +17,10 @@ const { config, layers } = await loadConfig({
 
     cwd: path.join(__dirname, "configs"),
 
+    defaults: {
+        dhello: "hello from defaults"
+    },
+
     configs: [
         { "jsonobject": "hello from a json object" },
         { 
@@ -35,4 +39,4 @@ const { config, layers } = await loadConfig({
 });
 
 console.timeEnd("config load");
-console.log(config);
+console.log(layers, config);

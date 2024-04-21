@@ -19,6 +19,8 @@ async function doLayer(config: Config, data: any): Promise<Layer> {
     try {
         if(data === process.env) {
             layerData.type = "PROCESS_ENV";
+        } else if(data === config.defaults) {
+            layerData.type = "DEFAULTS";  
         } else if(isObject(data)) {
             layerData.type = "OBJECT";
         } else if(typeof(data) === "string") {
@@ -31,6 +33,7 @@ async function doLayer(config: Config, data: any): Promise<Layer> {
 
         switch(layerData.type) {
             case "OBJECT":
+            case "DEFAULTS":
                 layerData.value = data;
             break;
 
@@ -80,6 +83,9 @@ export default async function loadConfig<ReturnType = any>(config: Config): Prom
         configs: []
     });
 
+    // Make config.defaults the first config layer
+    config.configs.unshift(config.defaults);
+
     if(config.guessFiles) {
         const guessRegex = new RegExp(`^${config.name}\.(env|json)`, config.caseinsensitive ? "i" : "");
         for(const file of await fs.readdir(config.cwd)) {
@@ -96,7 +102,7 @@ export default async function loadConfig<ReturnType = any>(config: Config): Prom
 
     config.configs = config.configs.filter(uniqueArrayFilter);
 
-    let finalConfig: any = await doLayer(config, config.defaults).then(layer => layer.value);
+    let finalConfig: any = {};
     const layerPromises: Promise<Layer>[] = [];
     const layers: Layer[] = [];
 
