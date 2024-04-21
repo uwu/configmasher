@@ -1,28 +1,28 @@
 export interface Config extends Object {
-	defaults?: Object;
-	name?: string;
-	cwd?: string;
-	
-	dotenv?: boolean;
-	processenv?: boolean;
+    defaults?: Object;
+    name?: string;
+    cwd?: string;
+    
+    dotenv?: boolean;
+    processenv?: boolean;
 
-	guessFiles?: boolean;
+    guessFiles?: boolean;
 
-	caseinsensitive?: boolean;
+    caseinsensitive?: boolean;
 
-	configs?: any[];
-	mandatory?: (string[] | string)[];
+    configs?: any[];
+    mandatory?: (string[] | string)[];
 }
 
 export interface Layer {
-	type: string;
+    type: string;
 
-	input: any;
-	value?: any;
-	error?: Error;
+    input: any;
+    value?: any;
+    error?: Error;
 }
 
 export interface ConfigReturn<ReturnType = any> {
-	config: ReturnType;
-	layers: Layer[];
+    config: ReturnType;
+    layers: Layer[];
 }

@@ -9,29 +9,29 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 console.time("config load");
 
 const { config, layers } = await loadConfig({
-	dotenv: true,
-	processenv: true,
+    dotenv: true,
+    processenv: true,
 
-	caseinsensitive: false,
-	guessFiles: false,
+    caseinsensitive: false,
+    guessFiles: false,
 
-	cwd: path.join(__dirname, "configs"),
+    cwd: path.join(__dirname, "configs"),
 
-	configs: [
-		{ "jsonobject": "hello from a json object" },
-		{ 
-			hello: { 
-				yOo: "configmasher is now recursive",
-			}
-		},
-		{ 
-			hello: { 
-				hello: "configmasher is now recursive",
-			}
-		},
-		"jsonfile.json",
-		"hello.env"
-	]
+    configs: [
+        { "jsonobject": "hello from a json object" },
+        { 
+            hello: { 
+                yOo: "configmasher is now recursive",
+            }
+        },
+        { 
+            hello: { 
+                hello: "configmasher is now recursive",
+            }
+        },
+        "jsonfile.json",
+        "hello.env"
+    ]
 });
 
 console.timeEnd("config load");
