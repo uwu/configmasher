@@ -60,14 +60,3 @@ console.log(config);
 }
 */
 ```
-
-## TODO
-
-- [ ] Proper documentation (can't be bothered atm, just use typedefs)
-- [X] Allow as many underscores as the user wants between name and value : ``${NAME}_${VAL}``, ``${NAME}__${VAL}``, ``${NAME}_________${VAL}``
-- [X] Automatically try to get and parse ${NAME}.json and toLowerCase if it exists
-- [X] Allow the use of a proxy to make keys case-insensitive
-- [X] Add mandatory fields
-- [ ] Support adding custom config formats
-- [ ] Support CJS and ESM config
-- [ ] Move all this to issues
