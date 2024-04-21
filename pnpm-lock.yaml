@@ -5,6 +5,7 @@ specifiers:
   '@rollup/plugin-json': ^6.1.0
   '@rollup/plugin-node-resolve': ^15.2.3
   '@rollup/plugin-typescript': ^11.1.6
+  '@types/node': ^20.12.7
   defu: ^6.1.4
   dotenv: ^16.4.5
   esbuild: ^0.20.2
@@ -24,6 +25,7 @@ devDependencies:
   '@rollup/plugin-json': 6.1.0_rollup@4.16.0
   '@rollup/plugin-node-resolve': 15.2.3_rollup@4.16.0
   '@rollup/plugin-typescript': 11.1.6_hfi7nct54lcz36vpiuw4kr6h4m
+  '@types/node': 20.12.7
   esbuild: 0.20.2
   rimraf: 5.0.5
   rollup: 4.16.0
@@ -512,6 +514,12 @@ packages:
 
   /@types/estree/1.0.5:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
+    dev: true
+
+  /@types/node/20.12.7:
+    resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==}
+    dependencies:
+      undici-types: 5.26.5
     dev: true
 
   /@types/resolve/1.20.2:
@@ -1148,6 +1156,10 @@ packages:
     resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
     engines: {node: '>=14.17'}
     hasBin: true
+    dev: true
+
+  /undici-types/5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
     dev: true
 
   /universalify/2.0.1:

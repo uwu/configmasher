@@ -36,6 +36,7 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^20.12.7",
     "esbuild": "^0.20.2",
     "rimraf": "^5.0.5",
     "rollup": "^4.16.0",
