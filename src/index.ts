@@ -70,10 +70,10 @@ async function doLayer(config: Config, input: any): Promise<Layer> {
     }
 
     /*
-        If config.caseinsensitive is set to true and the input was an object (checked using layerData.type),
+        If config.caseInsensitive is set to true and the input was an object (checked using layerData.type),
         then we lowercase the object
     */
-    if(config.caseinsensitive && layerData.value && (layerData.type == "JSON_FILE" || layerData.type == "OBJECT" || layerData.type == "DEFAULTS")) {
+    if(config.caseInsensitive && layerData.value && (layerData.type == "JSON_FILE" || layerData.type == "OBJECT" || layerData.type == "DEFAULTS")) {
         layerData.value = lowercaseObject(layerData.value);
     }
 
@@ -92,12 +92,12 @@ export default async function loadConfig<ReturnType = any>(config: Config): Prom
         name: "config",
         cwd: process.cwd(),
 
-        dotenv: true,
-        processenv: true,
+        environmentFile: true,
+        processEnvironment: true,
 
         guessFiles: true,
 
-        caseinsensitive: false,
+        caseInsensitive: false,
 
         configs: []
     });
@@ -107,7 +107,7 @@ export default async function loadConfig<ReturnType = any>(config: Config): Prom
 
     // If config.guessFiles is set to true, then we try to find json/env files that match the config.name within config.cwd
     if(config.guessFiles) {
-        const guessRegex = new RegExp(`^${config.name}\.(env|json)`, config.caseinsensitive ? "i" : "");
+        const guessRegex = new RegExp(`^${config.name}\.(env|json)`, config.caseInsensitive ? "i" : "");
 
         for(const file of await fs.readdir(config.cwd)) {
             if(file.match(guessRegex)) {
@@ -116,13 +116,13 @@ export default async function loadConfig<ReturnType = any>(config: Config): Prom
         }
     }
 
-    // If config.dotenv is set to true, then we try to find a .env file within config.cwd and push that to config.configs
-    if(config.dotenv && config.cwd) {
+    // If config.environmentFile is set to true, then we try to find a .env file within config.cwd and push that to config.configs
+    if(config.environmentFile && config.cwd) {
         config.configs.push(path.resolve(config.cwd, ".env"));
     }
 
-    // If config.processenv is set to true, then we push process.env to config.configs
-    if(config.processenv) {
+    // If config.processEnvironment is set to true, then we push process.env to config.configs
+    if(config.processEnvironment) {
         config.configs.push(process.env);
     }
 
@@ -151,8 +151,8 @@ export default async function loadConfig<ReturnType = any>(config: Config): Prom
         finalConfig = defu(layers[i].value, finalConfig);
     }
     
-    // If config.caseinsensitive is set to true, then the final config object is wrapped in a case insensitive proxy
-    if(config.caseinsensitive) {
+    // If config.caseInsensitive is set to true, then the final config object is wrapped in a case insensitive proxy
+    if(config.caseInsensitive) {
         finalConfig = caseInsensitiveProxy(finalConfig);
     }
 
@@ -181,7 +181,7 @@ export default async function loadConfig<ReturnType = any>(config: Config): Prom
 
     if(missingEntries.length > 0) {
         let missingEntriesText = missingEntries.join(", ");
-        throw Error(`Configuration is missing the following entries : ${config.caseinsensitive ? missingEntriesText.toLowerCase(): missingEntriesText}`);
+        throw Error(`Configuration is missing the following entries : ${config.caseInsensitive ? missingEntriesText.toLowerCase(): missingEntriesText}`);
     }
 
     return { config: finalConfig, layers };

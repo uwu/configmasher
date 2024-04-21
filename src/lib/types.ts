@@ -3,12 +3,12 @@ export interface Config extends Object {
     name?: string;
     cwd?: string;
     
-    dotenv?: boolean;
-    processenv?: boolean;
+    environmentFile?: boolean;
+    processEnvironment?: boolean;
 
     guessFiles?: boolean;
 
-    caseinsensitive?: boolean;
+    caseInsensitive?: boolean;
 
     configs?: any[];
     mandatory?: (string[] | string)[];

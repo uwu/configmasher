@@ -6,8 +6,8 @@ const loadConfig = require("../dist/index.cjs");
     console.time("config load");
     
     const { config, layers } = await loadConfig({
-        dotenv: true,
-        processenv: true,
+        environmentFile: true,
+        processEnvironment: true,
         
         cwd: path.join(__dirname, "configs"),
     

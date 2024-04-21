@@ -29,8 +29,8 @@ const loadConfig = require("configmasher");
 import loadConfig from "configmasher";
 
 const { config, layers } = await loadConfig({
-  dotenv: true,
-  processenv: true,
+  environmentFile: true,
+  processEnvironment: true,
 
   name: "myprogram",
 

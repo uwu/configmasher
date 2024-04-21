@@ -39,7 +39,7 @@ function parseEnvEntry(key: string, value: any): Object {
  * @returns Environment entries parsed into an object.
  */
 export default function parseEnvEntries(config: Config, entries: [string, unknown][]): Object {
-    const nameRegex = new RegExp(`^${config.name}_+`, "gm" + (config.caseinsensitive ? "i" : ""));
+    const nameRegex = new RegExp(`^${config.name}_+`, "gm" + (config.caseInsensitive ? "i" : ""));
     let finalObject = {};
 
     for(let [key, value] of entries) {
@@ -47,7 +47,7 @@ export default function parseEnvEntries(config: Config, entries: [string, unknow
 
         if(matches = key.match(nameRegex)) {
             key = key.replace(matches[0], "");
-            if(config.caseinsensitive) key = key.toLowerCase();
+            if(config.caseInsensitive) key = key.toLowerCase();
 
             finalObject = defu(finalObject, parseEnvEntry(key, value));
         }

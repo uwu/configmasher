@@ -9,10 +9,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 console.time("config load");
 
 const { config, layers } = await loadConfig({
-    dotenv: true,
-    processenv: true,
+    environmentFile: true,
+    processEnvironment: true,
 
-    caseinsensitive: false,
+    caseInsensitive: false,
     guessFiles: false,
 
     cwd: path.join(__dirname, "configs"),
