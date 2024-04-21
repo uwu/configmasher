@@ -96,7 +96,7 @@ export default async function loadConfig<ReturnType = any>(config: Config): Prom
 
     config.configs = config.configs.filter(uniqueArrayFilter);
 
-    let finalConfig: any = config.defaults;
+    let finalConfig: any = await doLayer(config, config.defaults).then(layer => layer.value);
     const layerPromises: Promise<Layer>[] = [];
     const layers: Layer[] = [];
 
