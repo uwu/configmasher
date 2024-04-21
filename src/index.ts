@@ -53,7 +53,8 @@ async function doLayer(config: Config, input: any): Promise<Layer> {
 
             case "ENV_FILE":
                 const result = dotenv.config({
-                    path: resolvePath(config.cwd, input)
+                    path: resolvePath(config.cwd, input),
+                    processEnv: {} // <- append to an empty object instead of appending to process.env
                 });
     
                 if(result.error) {
