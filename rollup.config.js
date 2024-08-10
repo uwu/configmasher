@@ -28,11 +28,7 @@ export default [
             
             json(),
             commonjs(),
-            nodeResolve(),
-            
-            esbuild({
-                minify: true
-            })
+            nodeResolve()
         ]
     },
 
