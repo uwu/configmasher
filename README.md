@@ -22,10 +22,6 @@ configs
 ```
 
 ```js
-// CommonJS
-const loadConfig = require("configmasher");
-
-// ESM
 import loadConfig from "configmasher";
 
 const { config, layers } = await loadConfig({

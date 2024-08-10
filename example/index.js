@@ -2,7 +2,7 @@ import path from "node:path";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import loadConfig from "../dist/index.mjs";
+import loadConfig from "../dist/index.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

@@ -3,20 +3,23 @@
         "target": "ESNext",
         "module": "ESNext",
 
-        "declaration": false,
+        "declaration": true,
 
         "moduleResolution": "node",
         "noImplicitAny": false,
 
         "allowSyntheticDefaultImports": true,
+        "esModuleInterop":true,
 
-        "sourceMap": false,
-        "outDir": "dist",
+        "downlevelIteration": true,
 
         "rootDir": "src",
         "baseUrl": "src",
+
+        "sourceMap": false,
+        "outDir": "dist",
     },
 
     "include": [ "src/**/*.ts" ],
-    "exclude": [ "dist" ]
+    "exclude": [ "dist", "node_modules" ]
 }
